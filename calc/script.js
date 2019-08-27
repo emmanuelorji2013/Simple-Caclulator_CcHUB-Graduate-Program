@@ -52,6 +52,7 @@ updateDisplayValue = (e) => {
         }
         display(displayValue)
         break;
+    
     }
     
     case "%": {
