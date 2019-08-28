@@ -4,7 +4,10 @@ var displayValue = "0";
 var waitingForOperator = false;
 var isNewOperation = false;
 var canPoint = true;
+<<<<<<< HEAD
 var isAnswer = false
+=======
+>>>>>>> 3a5766e89ee18939694e8fb9a28d8666b2c44428
 
 
 updateDisplayValue = (e) => {
