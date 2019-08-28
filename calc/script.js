@@ -3,6 +3,7 @@ const allButtons = document.getElementsByClassName("bu")
 var displayValue = "0";
 var waitingForOperator = false;
 var isNewOperation = false;
+var canPoint = true;
 
 
 updateDisplayValue = (e) => {
@@ -32,6 +33,7 @@ updateDisplayValue = (e) => {
             displayValue += buText
             display(displayValue);
             waitingForOperator = false;
+            canPoint = true;
         }
         break;
     }
@@ -47,8 +49,9 @@ updateDisplayValue = (e) => {
     }
 
     case ".": {
-        if(!(displayValue.includes(buText)) && waitingForOperator) {
+        if(waitingForOperator || canPoint) {
             displayValue += buText
+            canPoint = false;
         }
         display(displayValue)
         break;
@@ -63,7 +66,7 @@ updateDisplayValue = (e) => {
         break;
     }
     case "(-)": {
-        displayValue = (displayValue[0] == "-")? displayValue.slice(1): "-" + displayValue;
+        displayValue = (displayValue[0] == "-")? displayValue.slice(2,displayValue.length - 1): "-(" + displayValue + ")";
         display(displayValue);
         break;
     }
