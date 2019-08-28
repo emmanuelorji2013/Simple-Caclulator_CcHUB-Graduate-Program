@@ -3,6 +3,8 @@ const allButtons = document.getElementsByClassName("bu")
 var displayValue = "0";
 var waitingForOperator = false;
 var isNewOperation = false;
+var canPoint = true;
+var isAnswer = false
 
 
 updateDisplayValue = (e) => {
@@ -32,6 +34,7 @@ updateDisplayValue = (e) => {
             displayValue += buText
             display(displayValue);
             waitingForOperator = false;
+            canPoint = true;
         }
         break;
     }
@@ -47,8 +50,10 @@ updateDisplayValue = (e) => {
     }
 
     case ".": {
-        if(!(displayValue.includes(buText)) && waitingForOperator) {
+        if((waitingForOperator && canPoint)) {
             displayValue += buText
+            canPoint = false;
+            waitingForOperator = false; //Point cannot be followed by an operator
         }
         display(displayValue)
         break;
@@ -63,7 +68,7 @@ updateDisplayValue = (e) => {
         break;
     }
     case "(-)": {
-        displayValue = (displayValue[0] == "-")? displayValue.slice(1): "-" + displayValue;
+        displayValue = (displayValue[0] == "-")? displayValue.slice(2,displayValue.length - 1): "-(" + displayValue + ")";
         display(displayValue);
         break;
     }
@@ -73,7 +78,13 @@ updateDisplayValue = (e) => {
         displayValue = (displayValue === "0")? (buText): (displayValue + buText)
         display(displayValue);
         break;
-    }     
+    }
+    
+    case "\u0011": {
+        // (\u0011) is unicode for the HTML code (&#17;) used for back button
+        displayValue = displayValue.slice(0, displayValue.length-1);
+        display(displayValue);
+    }
         // default:
         //     break;
     }
@@ -92,15 +103,21 @@ function display(displayVal) {
 
 function performOperation(displayVal) {
     //displayValue = displayVal
-    
-    try {
-        var convertedDisplayValue = displayVal.replace(/\u005E/g, "**");
-        displayValue = eval(convertedDisplayValue);
-        display(displayValue);
-    } catch (error) {
-        alert(error);
+    if(displayValue && displayValue !== "0") {
+        try {
+            var convertedDisplayValue = displayVal.toString().replace(/\u005E/g, "**"); // (/\u005E/g) is regular expression for all appearances of (^)
+            displayValue = eval(convertedDisplayValue).toString();
+            
+            canPoint = displayValue.includes(".")? false: canPoint; //Disable addition of point if answer contains "." 
+            
+            display(displayValue);
+            isAnswer = true;
+        } catch (error) {
+            alert(error);
+        }
+        //waitingForOperator = false;
     }
-    //waitingForOperator = false;
+    
 }
 
 

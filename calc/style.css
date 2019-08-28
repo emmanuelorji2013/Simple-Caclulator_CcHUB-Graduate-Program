@@ -43,11 +43,11 @@ footer {
     left: 50%;
 }
 
-#zero {
+#equals {
     width: calc(100%/2 - 10px);
 }
 
-#equals {
+#zero {
     height: calc((100% - 100px)/3 - 10px);
-    position: absolute;
+    /* position: absolute; */
 }
