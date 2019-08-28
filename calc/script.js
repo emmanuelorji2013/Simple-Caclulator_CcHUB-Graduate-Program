@@ -42,7 +42,7 @@ updateDisplayValue = (e) => {
     }
     case "=": {
         performOperation(displayValue);
-        isNewOperation = true;
+        //isNewOperation = true;
         break;
     }
 
@@ -58,7 +58,7 @@ updateDisplayValue = (e) => {
     case "%": {
         //The percentage of the evaluation of the whole entry is calculated 
         performOperation("(" + displayValue + ")" + "/100")  
-        isNewOperation = true;
+       // isNewOperation = true;
         //Add /100 the display 
         break;
     }
@@ -91,15 +91,16 @@ function display(displayVal) {
 }
 
 function performOperation(displayVal) {
-    displayValue = displayVal
-    var convertedDisplayValue = displayVal.replace(/\u005E/g, "**");
+    //displayValue = displayVal
+    
     try {
-        displayVal = eval(convertedDisplayValue);
-        display(displayVal);
+        var convertedDisplayValue = displayVal.replace(/\u005E/g, "**");
+        displayValue = eval(convertedDisplayValue);
+        display(displayValue);
     } catch (error) {
         alert(error);
     }
-    waitingForOperator = false;
+    //waitingForOperator = false;
 }
 
 
