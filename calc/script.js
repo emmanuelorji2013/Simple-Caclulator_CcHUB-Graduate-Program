@@ -4,7 +4,7 @@ var displayValue = "0";
 var waitingForOperator = false;
 var isNewOperation = false;
 var canPoint = true;
-//var isAnswer = false;
+var isAnswer = false;
 
 
 updateDisplayValue = (e) => {
@@ -35,6 +35,7 @@ updateDisplayValue = (e) => {
             display(displayValue);
             waitingForOperator = false;
             canPoint = true;
+            isAnswer = false;
         }
         break;
     }
@@ -69,7 +70,12 @@ updateDisplayValue = (e) => {
     }
     case "(-)": {
         
-        displayValue = (displayValue[0] == "-")? displayValue.slice(2,displayValue.length - 1): "-(" + displayValue + ")";
+        if (isAnswer) {
+            displayValue = (displayValue[0] == "-")? displayValue.slice(1, displayValue.length): "-" + displayValue;
+        } else {
+            displayValue = (displayValue[0] == "-")? displayValue.slice(2,displayValue.length - 1): "-(" + displayValue + ")";
+        }
+        
         display(displayValue);
         break;
     }
@@ -115,7 +121,7 @@ function performOperation(displayVal) {
             canPoint = displayValue.includes(".")? false: canPoint; //Disable addition of point if answer contains "." 
             
             display(displayValue);
-            //isAnswer = true;
+            isAnswer = true;
         } catch (error) {
             alert(error);
         }
