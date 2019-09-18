@@ -56,7 +56,7 @@ updateDisplayValue = (e) => {
             canPoint = false;
             waitingForOperator = false; //Point cannot be followed by an operator
         }
-        display(displayValue)
+        display(displayValue);
         break;
     
     }
@@ -69,11 +69,15 @@ updateDisplayValue = (e) => {
         break;
     }
     case "(-)": {
-        
+
+        displayValue = displayValue === ""? "0": displayValue  //If displayValue is empty, set it to zero, else, it remains the same
+
+        //Only remove or put "-" if the display is an answer (because an answer may have a negative sign which is always without a bracket 
         if (isAnswer) {
             displayValue = (displayValue[0] == "-")? displayValue.slice(1, displayValue.length): "-" + displayValue;
-        } else {
-            displayValue = (displayValue[0] == "-")? displayValue.slice(2,displayValue.length - 1): "-(" + displayValue + ")";
+        } else {       //Else, envelope with "()" or "-()"
+            displayValue = ((displayValue.slice(0,2) == "-(") && displayValue[displayValue.length-1] == ")")?
+                displayValue.slice(2,displayValue.length - 1): "-(" + displayValue + ")";
         }
         
         display(displayValue);
@@ -87,7 +91,7 @@ updateDisplayValue = (e) => {
         break;
     }
     
-    case "\u0011": {
+    case "\u02C2": {
         // (\u0011) is unicode for the HTML code (&#17;) used for back button
         displayValue = displayValue.slice(0, displayValue.length-1);
         display(displayValue);
