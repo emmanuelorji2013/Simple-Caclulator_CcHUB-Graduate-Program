@@ -9,9 +9,9 @@ Below is a sample screenshot of the calculator in use:
 
 - HTML, CSS and JavaScript
 
-<!-- ## Live Demo (if available) -->
+## Live Demo
 
-[Live Demo Link](https://emmiiorji.github.io/Simple-Calculator_JS/)
+Live demo [here](https://emmiiorji.github.io/Simple-Calculator_JS/) and [here](https://myjavascriptscalc.netlify.app/)
 
 
 ## Getting Started
