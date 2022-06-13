@@ -3,7 +3,8 @@ This is a simple JavaScript calculator capable of performing simple mathematical
 
 Below is a sample screenshot of the calculator in use:
 
-![image](https://user-images.githubusercontent.com/20554583/173040713-94b2bbf7-3b79-4243-8b53-ec7caf30e7e5.png)
+![image](https://user-images.githubusercontent.com/20554583/173337835-950adac4-5150-4359-aeab-0b9335dec130.png)
+
 
 ## Built With
 
